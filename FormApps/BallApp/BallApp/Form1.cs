@@ -43,18 +43,17 @@ namespace BallApp {
                     balls.RemoveAt(i);
                     pbs[i].Location = new Point(2000, 2000);
                     pbs.RemoveAt(i);
-                } 
-            else if(ret == 2) {
+                } else if (ret == 2) {
 
                     pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
                     score.Text = "スコア：" + ++this.scoreCount;
 
                 } else {
-                //正常移動
-                pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
-            }
-                    
-                
+                    //正常移動
+                    pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
+                }
+
+
             }
         }
 
