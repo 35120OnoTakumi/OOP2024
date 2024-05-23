@@ -43,6 +43,10 @@ namespace BallApp {
                     balls.RemoveAt(i);
                     pbs[i].Location = new Point(2000, 2000);
                     pbs.RemoveAt(i);
+
+                    this.scoreCount -= 10;
+                    score.Text = "スコア：" + this.scoreCount;
+
                 } else if (ret == 2) {
 
                     pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
