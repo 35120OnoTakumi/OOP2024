@@ -26,15 +26,24 @@ namespace Section01 {
             Console.WriteLine(ret);*/
             #endregion
 
-
+            //↓例外処理
             Console.WriteLine("整数を入力");
             string inputNum = Console.ReadLine();
-            int num;
 
-            if (int.TryParse(inputNum, out num)) {
-                Console.WriteLine("整数に変換した値 :" + num);
-            } else {
-                Console.WriteLine("違うだろ!?違うだろ!?:");
+            try {
+                int num = int.Parse(inputNum);
+            }
+            catch (FormatException ex) {
+                Console.WriteLine("FormatException" + ex.Message);    
+            }
+            catch(ArgumentException ex) {
+                Console.WriteLine("ArgumentException" + ex.Message);
+            }
+            catch (OverflowException ex) {
+                Console.WriteLine("OverflowException" + ex.Message);
+            }
+            finally {
+                Console.WriteLine("処理が終了");
             }
 
         }
