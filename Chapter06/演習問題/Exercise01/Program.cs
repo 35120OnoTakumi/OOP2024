@@ -30,7 +30,7 @@ namespace Exercise01 {
             Console.WriteLine(max);
         }
 
-        private static void Exercise1_2(int[] numbers) {            
+        private static void Exercise1_2(int[] numbers) {
             var lastN = numbers.Skip(numbers.Length - 2).ToArray();
             foreach (int n in lastN) {
                 Console.WriteLine(n);
@@ -39,15 +39,15 @@ namespace Exercise01 {
 
         }
 
-        private static void Exercise1_3(int[] numbers) {            
+        private static void Exercise1_3(int[] numbers) {
             var str = numbers.Select(n => n.ToString()).ToArray();
-            foreach(var num in str)
-            Console.WriteLine(num);
+            foreach (var num in str)
+                Console.WriteLine(num);
         }
 
         private static void Exercise1_4(int[] numbers) {
             var num1 = numbers.OrderBy(n => n).ToArray().Where(n => n > 0).Take(3);
-            foreach(var n in num1) {
+            foreach (var n in num1) {
                 Console.WriteLine(n);
             }
 
