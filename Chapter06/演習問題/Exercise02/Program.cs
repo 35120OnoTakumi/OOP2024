@@ -106,12 +106,13 @@ namespace Exercise02 {
             foreach (var page in book) {
                 Console.WriteLine(page.Title);
             }
-
-                        ↑自考プログラム
             */
+                      //  ↑自考プログラム
+            
+            
             var selected = books.Where(b => b.Title.Contains("C#") && b.Pages <= 500);
             foreach (var book in selected)
-                Console.WriteLine(book.Title);
+                Console.WriteLine(book.Title);  
 
 
         }
