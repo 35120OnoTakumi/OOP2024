@@ -80,7 +80,6 @@ namespace Test02 {
         private static void Exercise02(List<int> numbers) {
             
 
-
         }
         //問題３　奇数のみを降順に並べて表示（遅延実行とする）
         //　　　　出力結果【91 87 53 35 31 17】
