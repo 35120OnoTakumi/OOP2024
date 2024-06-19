@@ -78,14 +78,14 @@ namespace Test02 {
         //問題２　偶数の最大値を表示
         //　　　　出力結果【94】
         private static void Exercise02(List<int> numbers) {
-            
-
+            var max = numbers.Where(n => n % 2 == 0)
+                             .Max();
+            Console.WriteLine(max);
         }
         //問題３　奇数のみを降順に並べて表示（遅延実行とする）
         //　　　　出力結果【91 87 53 35 31 17】
         private static void Exercise03(List<int> numbers) {
-
-
+           
         }
 
         //問題４　10以上50以下の数字のみを表示（即時実行でも可とする）
