@@ -85,7 +85,10 @@ namespace Test02 {
         //問題３　奇数のみを降順に並べて表示（遅延実行とする）
         //　　　　出力結果【91 87 53 35 31 17】
         private static void Exercise03(List<int> numbers) {
-           
+          /*  var num = numbers.Where(n => n % 2 == 1);
+            var number = numbers.OrderByDescending(n => n);
+            var allfile = num.Concat(number);
+            Console.WriteLine(allfile);*/
         }
 
         //問題４　10以上50以下の数字のみを表示（即時実行でも可とする）
