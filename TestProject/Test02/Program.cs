@@ -85,18 +85,16 @@ namespace Test02 {
         //問題３　奇数のみを降順に並べて表示（遅延実行とする）
         //　　　　出力結果【91 87 53 35 31 17】
         private static void Exercise03(List<int> numbers) {
-          /*  var num = numbers.Where(n => n % 2 == 1);
-            var number = numbers.OrderByDescending(n => n);
-            var allfile = num.Concat(number);
-            Console.WriteLine(allfile);*/
+            var selected = numbers.Where(n => n % 2 == 1).OrderByDescending(n => n. ToString());
+            foreach(int n in selected)
+                Console.WriteLine(n);
         }
+
 
         //問題４　10以上50以下の数字のみを表示（即時実行でも可とする）
         //　　　　出力結果【12 14 20 40 35 31 17 48】
         private static void Exercise04(List<int> numbers) {
-
-
-
+           
         }
 
         //問題５　平均年齢を表示
