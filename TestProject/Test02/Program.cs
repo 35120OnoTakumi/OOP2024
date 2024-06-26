@@ -94,21 +94,25 @@ namespace Test02 {
         //問題４　10以上50以下の数字のみを表示（即時実行でも可とする）
         //　　　　出力結果【12 14 20 40 35 31 17 48】
         private static void Exercise04(List<int> numbers) {
-           
+            var result = numbers.Where(x => x >= 10 && x <= 50);
+            foreach (var x in result) {
+                Console.Write(x);
+                Console.Write(" ");
+            }
         }
 
         //問題５　平均年齢を表示
         //　　　　出力結果【30.2才】
         private static void Exercise05(List<Person> persons) {
-            
-
-
+            var average = persons.Average(x => x.Age);
+            Console.WriteLine(average + "才");
         }
 
         //問題６　身長170cm以上の体重平均を表示
         //　　　　出力結果【72.25kg】
         private static void Exercise06(List<Person> persons) {
-
+            var average = persons.Where(x => x.Height >= 170).Average(x => x.Weight);
+            Console.WriteLine(average + "kg");
 
 
         }
@@ -118,16 +122,22 @@ namespace Test02 {
         //　　　　　　　　　沖田宏一 59kg
         //　　　　　　　　　片山伸介 65kg】
         private static void Exercise07(List<Person> persons) {
-        
-        
-        
+            var result = persons.Where(x => x.Weight <= 70);
+            foreach (var item in result) {
+                Console.WriteLine("{0} {1}kg", item.Name, item.Weight);
+            }
+
+
         }
 
         //問題８　名前に「山」の漢字が含まれている人全て表示
         //　　　　出力結果【山田隆司
         //　　　　　　　　　片山伸介】
         private static void Exercise08(List<Person> persons) {
-
+            var result = persons.Where(x => x.Name.Contains("山"));
+            foreach (var item in result) {
+                Console.WriteLine(item.Name);
+            }
 
 
         }
