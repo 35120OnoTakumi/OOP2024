@@ -54,6 +54,7 @@
             rbSubaru = new RadioButton();
             rbNissan = new RadioButton();
             rbToyota = new RadioButton();
+            rbHonda = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
@@ -149,7 +150,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            label6.Location = new Point(522, 24);
+            label6.Location = new Point(562, 24);
             label6.Name = "label6";
             label6.Size = new Size(50, 25);
             label6.TabIndex = 5;
@@ -158,7 +159,7 @@
             // pbPicture
             // 
             pbPicture.BackColor = SystemColors.ActiveCaption;
-            pbPicture.Location = new Point(522, 70);
+            pbPicture.Location = new Point(562, 70);
             pbPicture.Name = "pbPicture";
             pbPicture.Size = new Size(316, 196);
             pbPicture.TabIndex = 6;
@@ -167,7 +168,7 @@
             // btDeleteReport
             // 
             btDeleteReport.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btDeleteReport.Location = new Point(756, 294);
+            btDeleteReport.Location = new Point(796, 294);
             btDeleteReport.Name = "btDeleteReport";
             btDeleteReport.Size = new Size(82, 46);
             btDeleteReport.TabIndex = 7;
@@ -176,7 +177,7 @@
             // 
             // btPicDelete
             // 
-            btPicDelete.Location = new Point(763, 41);
+            btPicDelete.Location = new Point(796, 41);
             btPicDelete.Name = "btPicDelete";
             btPicDelete.Size = new Size(75, 23);
             btPicDelete.TabIndex = 7;
@@ -186,7 +187,7 @@
             // btAddReport
             // 
             btAddReport.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btAddReport.Location = new Point(522, 294);
+            btAddReport.Location = new Point(576, 294);
             btAddReport.Name = "btAddReport";
             btAddReport.Size = new Size(91, 46);
             btAddReport.TabIndex = 7;
@@ -236,7 +237,7 @@
             // 
             // btPicOpen
             // 
-            btPicOpen.Location = new Point(645, 41);
+            btPicOpen.Location = new Point(690, 41);
             btPicOpen.Name = "btPicOpen";
             btPicOpen.Size = new Size(75, 23);
             btPicOpen.TabIndex = 7;
@@ -246,7 +247,7 @@
             // btModifyReport
             // 
             btModifyReport.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btModifyReport.Location = new Point(640, 294);
+            btModifyReport.Location = new Point(690, 294);
             btModifyReport.Name = "btModifyReport";
             btModifyReport.Size = new Size(80, 46);
             btModifyReport.TabIndex = 7;
@@ -312,20 +313,21 @@
             // gpmaker
             // 
             gpmaker.Controls.Add(rbAther);
+            gpmaker.Controls.Add(rbHonda);
             gpmaker.Controls.Add(rbInport);
             gpmaker.Controls.Add(rbSubaru);
             gpmaker.Controls.Add(rbNissan);
             gpmaker.Controls.Add(rbToyota);
             gpmaker.Location = new Point(93, 125);
             gpmaker.Name = "gpmaker";
-            gpmaker.Size = new Size(398, 31);
+            gpmaker.Size = new Size(445, 31);
             gpmaker.TabIndex = 9;
             gpmaker.TabStop = false;
             // 
             // rbAther
             // 
             rbAther.AutoSize = true;
-            rbAther.Location = new Point(299, 12);
+            rbAther.Location = new Point(368, 6);
             rbAther.Name = "rbAther";
             rbAther.Size = new Size(56, 19);
             rbAther.TabIndex = 0;
@@ -336,7 +338,7 @@
             // rbInport
             // 
             rbInport.AutoSize = true;
-            rbInport.Location = new Point(215, 12);
+            rbInport.Location = new Point(283, 12);
             rbInport.Name = "rbInport";
             rbInport.Size = new Size(61, 19);
             rbInport.TabIndex = 0;
@@ -347,7 +349,7 @@
             // rbSubaru
             // 
             rbSubaru.AutoSize = true;
-            rbSubaru.Location = new Point(145, 12);
+            rbSubaru.Location = new Point(139, 12);
             rbSubaru.Name = "rbSubaru";
             rbSubaru.Size = new Size(54, 19);
             rbSubaru.TabIndex = 0;
@@ -377,6 +379,17 @@
             rbToyota.TabStop = true;
             rbToyota.Text = "トヨタ";
             rbToyota.UseVisualStyleBackColor = true;
+            // 
+            // rbHonda
+            // 
+            rbHonda.AutoSize = true;
+            rbHonda.Location = new Point(209, 12);
+            rbHonda.Name = "rbHonda";
+            rbHonda.Size = new Size(53, 19);
+            rbHonda.TabIndex = 0;
+            rbHonda.TabStop = true;
+            rbHonda.Text = "ホンダ";
+            rbHonda.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -451,5 +464,6 @@
         private RadioButton rbNissan;
         private RadioButton rbToyota;
         private RadioButton rbAther;
+        private RadioButton rbHonda;
     }
 }
