@@ -23,13 +23,13 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            label1 = new Label();
+            lbDay = new Label();
             ddp = new DateTimePicker();
-            label2 = new Label();
+            lbRecord = new Label();
             cbAuther = new ComboBox();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
+            lbMaker = new Label();
+            lbCarname = new Label();
+            lbOpen = new Label();
             cbCar = new ComboBox();
             tbReport = new TextBox();
             label6 = new Label();
@@ -44,31 +44,31 @@
             btPicOpen = new Button();
             btModifyReport = new Button();
             groupBox1 = new GroupBox();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton3 = new RadioButton();
             radioButton4 = new RadioButton();
+            radioButton3 = new RadioButton();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
             gpmaker = new GroupBox();
+            rbAther = new RadioButton();
             rbInport = new RadioButton();
             rbSubaru = new RadioButton();
             rbNissan = new RadioButton();
             rbToyota = new RadioButton();
-            rbAther = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             gpmaker.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // lbDay
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            label1.Location = new Point(26, 26);
-            label1.Name = "label1";
-            label1.Size = new Size(54, 25);
-            label1.TabIndex = 0;
-            label1.Text = "日付:";
+            lbDay.AutoSize = true;
+            lbDay.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            lbDay.Location = new Point(26, 26);
+            lbDay.Name = "lbDay";
+            lbDay.Size = new Size(54, 25);
+            lbDay.TabIndex = 0;
+            lbDay.Text = "日付:";
             // 
             // ddp
             // 
@@ -78,15 +78,15 @@
             ddp.Size = new Size(200, 33);
             ddp.TabIndex = 1;
             // 
-            // label2
+            // lbRecord
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            label2.Location = new Point(11, 70);
-            label2.Name = "label2";
-            label2.Size = new Size(69, 25);
-            label2.TabIndex = 0;
-            label2.Text = "記録者";
+            lbRecord.AutoSize = true;
+            lbRecord.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            lbRecord.Location = new Point(11, 70);
+            lbRecord.Name = "lbRecord";
+            lbRecord.Size = new Size(69, 25);
+            lbRecord.TabIndex = 0;
+            lbRecord.Text = "記録者";
             // 
             // cbAuther
             // 
@@ -97,35 +97,35 @@
             cbAuther.Size = new Size(200, 33);
             cbAuther.TabIndex = 2;
             // 
-            // label3
+            // lbMaker
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            label3.Location = new Point(11, 124);
-            label3.Name = "label3";
-            label3.Size = new Size(63, 25);
-            label3.TabIndex = 0;
-            label3.Text = "メーカー";
+            lbMaker.AutoSize = true;
+            lbMaker.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            lbMaker.Location = new Point(11, 124);
+            lbMaker.Name = "lbMaker";
+            lbMaker.Size = new Size(63, 25);
+            lbMaker.TabIndex = 0;
+            lbMaker.Text = "メーカー";
             // 
-            // label4
+            // lbCarname
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            label4.Location = new Point(11, 171);
-            label4.Name = "label4";
-            label4.Size = new Size(50, 25);
-            label4.TabIndex = 0;
-            label4.Text = "車名";
+            lbCarname.AutoSize = true;
+            lbCarname.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            lbCarname.Location = new Point(11, 171);
+            lbCarname.Name = "lbCarname";
+            lbCarname.Size = new Size(50, 25);
+            lbCarname.TabIndex = 0;
+            lbCarname.Text = "車名";
             // 
-            // label5
+            // lbOpen
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            label5.Location = new Point(24, 412);
-            label5.Name = "label5";
-            label5.Size = new Size(50, 25);
-            label5.TabIndex = 0;
-            label5.Text = "一覧";
+            lbOpen.AutoSize = true;
+            lbOpen.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            lbOpen.Location = new Point(24, 412);
+            lbOpen.Name = "lbOpen";
+            lbOpen.Size = new Size(50, 25);
+            lbOpen.TabIndex = 0;
+            lbOpen.Text = "一覧";
             // 
             // cbCar
             // 
@@ -265,27 +265,16 @@
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             // 
-            // radioButton1
+            // radioButton4
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(14, 12);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(50, 19);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "トヨタ";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(81, 12);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(49, 19);
-            radioButton2.TabIndex = 0;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "日産";
-            radioButton2.UseVisualStyleBackColor = true;
+            radioButton4.AutoSize = true;
+            radioButton4.Location = new Point(215, 12);
+            radioButton4.Name = "radioButton4";
+            radioButton4.Size = new Size(61, 19);
+            radioButton4.TabIndex = 0;
+            radioButton4.TabStop = true;
+            radioButton4.Text = "輸入車";
+            radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
@@ -298,16 +287,27 @@
             radioButton3.Text = "スバル";
             radioButton3.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // radioButton2
             // 
-            radioButton4.AutoSize = true;
-            radioButton4.Location = new Point(215, 12);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new Size(61, 19);
-            radioButton4.TabIndex = 0;
-            radioButton4.TabStop = true;
-            radioButton4.Text = "輸入車";
-            radioButton4.UseVisualStyleBackColor = true;
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(81, 12);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(49, 19);
+            radioButton2.TabIndex = 0;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "日産";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(14, 12);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(50, 19);
+            radioButton1.TabIndex = 0;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "トヨタ";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
             // gpmaker
             // 
@@ -321,6 +321,17 @@
             gpmaker.Size = new Size(398, 31);
             gpmaker.TabIndex = 9;
             gpmaker.TabStop = false;
+            // 
+            // rbAther
+            // 
+            rbAther.AutoSize = true;
+            rbAther.Location = new Point(299, 12);
+            rbAther.Name = "rbAther";
+            rbAther.Size = new Size(56, 19);
+            rbAther.TabIndex = 0;
+            rbAther.TabStop = true;
+            rbAther.Text = "その他";
+            rbAther.UseVisualStyleBackColor = true;
             // 
             // rbInport
             // 
@@ -367,17 +378,6 @@
             rbToyota.Text = "トヨタ";
             rbToyota.UseVisualStyleBackColor = true;
             // 
-            // rbAther
-            // 
-            rbAther.AutoSize = true;
-            rbAther.Location = new Point(299, 12);
-            rbAther.Name = "rbAther";
-            rbAther.Size = new Size(56, 19);
-            rbAther.TabIndex = 0;
-            rbAther.TabStop = true;
-            rbAther.Text = "その他";
-            rbAther.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -400,11 +400,11 @@
             Controls.Add(cbCar);
             Controls.Add(cbAuther);
             Controls.Add(ddp);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lbOpen);
+            Controls.Add(lbCarname);
+            Controls.Add(lbMaker);
+            Controls.Add(lbRecord);
+            Controls.Add(lbDay);
             Name = "Form1";
             Text = "試乗レポート管理システム";
             Load += Form1_Load;
@@ -420,13 +420,13 @@
 
         #endregion
 
-        private Label label1;
+        private Label lbDay;
         private DateTimePicker ddp;
-        private Label label2;
+        private Label lbRecord;
         private ComboBox cbAuther;
-        private Label label3;
-        private Label label4;
-        private Label label5;
+        private Label lbMaker;
+        private Label lbCarname;
+        private Label lbOpen;
         private ComboBox cbCar;
         private TextBox tbReport;
         private Label label6;
