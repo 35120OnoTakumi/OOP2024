@@ -41,6 +41,7 @@
             this.tbFavorit.Name = "tbFavorit";
             this.tbFavorit.Size = new System.Drawing.Size(557, 19);
             this.tbFavorit.TabIndex = 0;
+            this.tbFavorit.TextChanged += new System.EventHandler(this.tbFavorit_TextChanged);
             // 
             // btGet
             // 
