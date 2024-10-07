@@ -100,6 +100,7 @@
             this.Controls.Add(this.bt_16_6);
             this.Name = "Form1";
             this.Text = "Form1";
+//            this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

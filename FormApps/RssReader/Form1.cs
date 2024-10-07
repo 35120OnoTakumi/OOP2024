@@ -15,41 +15,80 @@ using Microsoft.Web.WebView2.Core;
 using Windows.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Wpf;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml;
 
 
 namespace RssReader {
 
     public partial class Form1 : Form {
         List<TitleData> xtitles;
+        List<ItemSet> favorites = new List<ItemSet>();
+
         public Form1() {
             InitializeComponent();
             cbLoad();
             cbRssUrl.SelectedIndexChanged += lbRssUrl_SelectedIndexChanged;
-            //cbRssUrl.Dock = DockStyle.Top;
             this.Controls.Add(cbRssUrl);
             List<ItemSet> favorites = new List<ItemSet>();
             cbRssUrl.SelectedIndex = -1; // 初期選択をクリア
-                                         //lbRssTitle.Items.Clear(); // リストボックスをクリア
-
-
+                         
         }
 
         private void btGet_Click(object sender, EventArgs e) {
             if (cbRssUrl.SelectedItem is ItemSet selectedItem) {
                 using (var wc = new WebClient()) {
                     try {
-                        var url = wc.OpenRead(selectedItem.ItemName);
-                        var xdoc = XDocument.Load(url);
+                        var rssStream = wc.OpenRead(selectedItem.ItemName);
 
-                        xtitles = xdoc.Root.Descendants("item")
-                            .Select(title => new TitleData {
-                                Title = title.Element("title")?.Value,
-                                Link = title.Element("link")?.Value,
-                            }).ToList();
+                        // XmlReaderSettingsを使って外部DTDを無効にする設定を行う
+                        XmlReaderSettings settings = new XmlReaderSettings {
+                            DtdProcessing = DtdProcessing.Ignore, // DTDを無視する
+                            XmlResolver = null // 外部エンティティの解決を無効化
+                        };
 
-                        lbRssTitle.Items.Clear(); // 以前のアイテムをクリア
-                        foreach (var title in xtitles) {
-                            lbRssTitle.Items.Add(title.Title);
+                        using (XmlReader reader = XmlReader.Create(rssStream, settings)) {
+                            var xdoc = XDocument.Load(reader);
+
+                            xtitles = xdoc.Root.Descendants("item")
+                                .Select(title => new TitleData {
+                                    Title = title.Element("title")?.Value,
+                                    Link = title.Element("link")?.Value,
+                                }).ToList();
+
+                            lbRssTitle.Items.Clear(); // 以前のアイテムをクリア
+                            foreach (var title in xtitles) {
+                                lbRssTitle.Items.Add(title.Title);
+                            }
+                        }
+                    }
+                    catch (Exception ex) {
+                        MessageBox.Show($"RSSフィードの取得中にエラーが発生しました: {ex.Message}");
+                    }
+                }
+            } else if(cbRssUrl.Text != ""){
+                using (var wc = new WebClient()) {
+                    try {
+                        var rssStream = wc.OpenRead(cbRssUrl.Text);
+
+                        // XmlReaderSettingsを使って外部DTDを無効にする設定を行う
+                        XmlReaderSettings settings = new XmlReaderSettings {
+                            DtdProcessing = DtdProcessing.Ignore, // DTDを無視する
+                            XmlResolver = null // 外部エンティティの解決を無効化
+                        };
+
+                        using (XmlReader reader = XmlReader.Create(rssStream, settings)) {
+                            var xdoc = XDocument.Load(reader);
+
+                            xtitles = xdoc.Root.Descendants("item")
+                                .Select(title => new TitleData {
+                                    Title = title.Element("title")?.Value,
+                                    Link = title.Element("link")?.Value,
+                                }).ToList();
+
+                            lbRssTitle.Items.Clear(); // 以前のアイテムをクリア
+                            foreach (var title in xtitles) {
+                                lbRssTitle.Items.Add(title.Title);
+                            }
                         }
                     }
                     catch (Exception ex) {
@@ -98,7 +137,6 @@ namespace RssReader {
             if (cbRssUrl.SelectedIndex >= 0) {
                 var selectedItem = (ItemSet)cbRssUrl.SelectedItem;
 
-
             }
         }
 
@@ -128,7 +166,7 @@ namespace RssReader {
                     cbRssUrl.DisplayMember = "ItemValue"; // 表示名としてItemValueを設定
                     cbRssUrl.ValueMember = "ItemName"; // 値名としてItemNameを設定
 
-                    MessageBox.Show($"{selectedTitle.Title} をお気に入りに追加しました。");
+                    
                 } else {
                     MessageBox.Show("このリンクは既にお気に入りに追加されています。");
                 }
@@ -138,10 +176,21 @@ namespace RssReader {
 
         }
 
+        private void ShowFavorites() {
+            if (favorites.Count > 0) {
+                StringBuilder favoriteList = new StringBuilder("お気に入りリスト:\n");
+                foreach (var item in favorites) {
+                    favoriteList.AppendLine($"{item.ItemValue} - {item.ItemName}");
+                }
+                MessageBox.Show(favoriteList.ToString(), "お気に入り一覧");
+            } else {
+               
+            }
+        }
 
 
         private void Form1_Load_1(object sender, EventArgs e) {
-
+            ShowFavorites();
         }
     }
 
