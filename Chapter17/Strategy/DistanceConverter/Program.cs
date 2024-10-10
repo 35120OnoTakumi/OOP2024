@@ -22,6 +22,7 @@ namespace DistanceConverter {
 
         }
 
+        //変換したい距離入力
         static double GetDistance(ConverterBase from) {
             double? value = null;
             do {
