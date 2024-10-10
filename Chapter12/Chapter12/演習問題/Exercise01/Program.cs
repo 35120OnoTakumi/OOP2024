@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text.Encodings.Web;
-using System.Text.Json;
+//using System.Text.Json;
 using System.Text.Unicode;
 using System.Xml;
 using System.Xml.Serialization;
@@ -82,7 +82,7 @@ namespace Exercise01 {
                 },
             };
 
-            using (var stream = new FileStream(file, FileMode.Create, FileAccess.Write)) {
+          /*  using (var stream = new FileStream(file, FileMode.Create, FileAccess.Write)) {
                 
                 var options = new JsonSerializerOptions {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,  //キー名のカスタマイズ
@@ -91,7 +91,7 @@ namespace Exercise01 {
                 };
 
                 JsonSerializer.Serialize(stream, emps, options);
-            }
+            }*/
 
         }
     }

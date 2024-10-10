@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Text.Json;
+//using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
 
@@ -32,13 +32,13 @@ namespace Section02 {
             }
 #else
 
-            var options = new JsonSerializerOptions {
+            /*var options = new JsonSerializerOptions {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 WriteIndented = true,
-            };
+            };*/
 
-            string jsonString = JsonSerializer.Serialize(novels,options);
-            Console.WriteLine(jsonString);  //画面へ出力
+           /* string jsonString = JsonSerializer.Serialize(novels,options);
+            Console.WriteLine(jsonString);  //画面へ出力*/
 #endif
         }
     }
