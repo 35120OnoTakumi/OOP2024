@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TextFileProcessor;
 
-namespace LineCounter {
+namespace TextFileProcessor {
     internal class Program {
         static void Main(string[] args) {
-            TextProcessor.Run<LineCounterProcessor>(args[0]);
+
+            
         }
     }
 }

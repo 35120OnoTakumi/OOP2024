@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TextFileProcessor;
 
-namespace LineCounter {
+namespace TextNumberSizeChange {
     class LineCounterProcessor : TextProcessor{
 
         private int _count;
