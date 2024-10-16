@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{522EF334-CD32-4507-BAED-FF71285D606A}</ProjectGuid>
+    <ProjectGuid>{9600F2DC-7774-4F20-8FC1-A67325E6D85C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TextNumberSizeChange</RootNamespace>
-    <AssemblyName>TextNumberSizeChange</AssemblyName>
+    <RootNamespace>ITextService</RootNamespace>
+    <AssemblyName>ITextService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,25 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\ITextFileService.cs" />
-    <Compile Include="Framework\TextFileProcessor.cs" />
-    <Compile Include="ToHankakuProcessor.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Strategy\TemplateMethod\TextFileProcessor\TextFileProcessor.csproj">
-      <Project>{05e25068-3cef-42c8-bea3-b028aa035fe0}</Project>
-      <Name>TextFileProcessor</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,7 +8,10 @@ using TextFileProcessor;
 namespace TextNumberSizeChange {
     internal class Program {
         static void Main(string[] args) {
-            TextProcessor.Run<ToHankakuProcessor>(args[0]);
+           // TextProcessor.Run<ToHankakuProcessor>(args[0]);
+
+           var proccesor = new Framework.TextFileProcessor(new ToHankakuProcessor());
+            proccesor.Run(args[0]);
         }
     }
 }

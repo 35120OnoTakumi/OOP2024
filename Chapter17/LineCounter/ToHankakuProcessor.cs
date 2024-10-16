@@ -4,25 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextFileProcessor;
+using TextNumberSizeChange.Framework;
 
 namespace TextNumberSizeChange {
-    class ToHankakuProcessor : TextProcessor {
+    class ToHankakuProcessor : ITextFileService {
 
         private int _count;
         private StringBuilder _text = new StringBuilder();
 
-        protected override void Initialize(string fname) {
+        public void Initialize(string fname) {
             _count = 0;
         }
 
-        protected override void Execute(string line) {
+        public void Execute(string line) {
             // 全角数字を半角数字に置き換え
             string convertedLine = ConvertToHankakuNumbers(line);
-            _text.AppendLine(convertedLine); // 変換して追加
+            _text.AppendLine(convertedLine); // 半角にしたものを追加する
             _count++;
         }
 
-        protected override void Terminate() {
+        public void Terminate() {
             Console.WriteLine("{0} 行", _count);
             Console.WriteLine(_text.ToString());
         }
@@ -38,5 +39,6 @@ namespace TextNumberSizeChange {
 
             return input;
         }
+
     }
 }
