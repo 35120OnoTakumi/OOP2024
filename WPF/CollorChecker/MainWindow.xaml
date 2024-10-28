@@ -42,7 +42,7 @@
             <TextBox x:Name="bValue" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" FontSize="20" 
                      Text="{Binding Value, ElementName=bSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:0}}"/>
 
-            <ComboBox x:Name="colorSelectComboBox" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Margin="5" SelectionChanged="colorSelectComboBox_SelectionChanged"
+            <ComboBox x:Name="colorSelectComboBox" Grid.ColumnSpan="3" Grid.Row="3" VerticalAlignment="Center" Margin="20" SelectionChanged="colorSelectComboBox_SelectionChanged"
                      ItemsSource="{Binding}"  SelectedValue="{Binding Color}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
