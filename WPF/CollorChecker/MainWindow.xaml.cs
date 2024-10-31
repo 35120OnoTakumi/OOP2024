@@ -32,7 +32,9 @@ namespace CollorChecker {
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
             colorArea.Background = new SolidColorBrush(currentColor.Color);
-            currentColor.Name = null;
+            currentColor.Name = GetColorList().Where(c => c.Equals(currentColor.Color = currentColor.Name));
+
+            
         }
         //currentColror.Color = Color.FromRgb((byte)rSlider.Value,(byte)gSlider.Value,(byte)bSlider.Value);
         /* var rvalue = (int) rSlider.Value;
@@ -110,8 +112,16 @@ namespace CollorChecker {
             return typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static)
                 .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
-       
-            
-        
+
+        private void removeButton_Click(object sender, RoutedEventArgs e) {
+            if (stockList.SelectedItem != null) {
+
+                //stockList.Items.RemoveAt(stockList.SelectedItem[]);
+
+            } else {
+                MessageBox.Show("削除するもんを選択！");
+            }
+        }
+
     }
 }
