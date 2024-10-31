@@ -21,21 +21,35 @@ namespace CollorChecker {
     /// </summary>
     public partial class MainWindow : Window {
         MyColor currentColor;//現在の色設定
+        MyColor[] colorsTable;//色データ
 
         public MainWindow() {
             InitializeComponent();
             //αチャンネルの初期値設定(起動時直ちにストックボタンが押されたとき)
             currentColor.Color = Color.FromArgb(255, 0, 0, 0);
-            colorSelectComboBox.DataContext = GetColorList();
+            colorSelectComboBox.DataContext = colorsTable = GetColorList();
         }
         //Sliderの値を入手色に変更
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
-            colorArea.Background = new SolidColorBrush(currentColor.Color);
-            currentColor.Name = GetColorList().Where(c => c.Equals(currentColor.Color = currentColor.Name));
-
+            //currentColor.Name = colorsTable.Where(c => c.Color.Equals(currentColor.Color)).Select(x => x.Name).FirstOrDefault();
             
+            int i;
+            for(i = 0; i < colorsTable.Length; i++) {
+                if (colorsTable[i].Color.Equals(currentColor.Color)) {
+                    currentColor.Name = colorsTable[i].Name;
+                    break;
+                }
+            }
+            //if(i != colorsTable.Length) {
+            //    colorSelectComboBox.SelectedIndex = i;
+            //} else {
+
+            //}
+            colorSelectComboBox.SelectedIndex = i;
+            colorArea.Background = new SolidColorBrush(currentColor.Color);
         }
+
         //currentColror.Color = Color.FromRgb((byte)rSlider.Value,(byte)gSlider.Value,(byte)bSlider.Value);
         /* var rvalue = (int) rSlider.Value;
          var gvalue = (int) gSlider.Value;
@@ -119,7 +133,7 @@ namespace CollorChecker {
                 //stockList.Items.RemoveAt(stockList.SelectedItem[]);
 
             } else {
-                MessageBox.Show("削除するもんを選択！");
+                MessageBox.Show("削除するんを選択せぇ！");
             }
         }
 
