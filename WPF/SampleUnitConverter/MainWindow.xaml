@@ -13,7 +13,6 @@
         <StackPanel Orientation="Horizontal">
             <TextBox Width="100" Margin="4" Text="{Binding MetricValue,StringFormat={}{0:N3}}"/>
             <ComboBox Width="80" Margin="4" SelectedItem="{Binding CurrentMetricUnit}"
-                      SelectedItem="{Binding CurrentMetricUnit}"
                       ItemsSource="{Binding Source={x:Static SampleUnitConverter:MetricUnit.Units}}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -22,7 +21,8 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBox Width="100" Margin="4" Text="{Binding ImperialValue,StringFormat={}{0:N3}}"/>
-            <ComboBox Width="80" Margin="4" SelectedItem="{Binding CurrentimperialUnit}"/>
+            <ComboBox Width="80" Margin="4" SelectedItem="{Binding CurrentImperialUnit}"
+                      ItemsSource="{Binding Source={x:Static SampleUnitConverter:ImperialUnit.Units}}"/>
         </StackPanel>
     </StackPanel>
 </Window>
