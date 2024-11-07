@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace SampleWeightUnitConverter {
     public class GuramUnit : WeightUnit{
         private static List<GuramUnit> units = new List<GuramUnit>(){
-            new GuramUnit{ Name = "mg",Coefficient = 1,},
-            new GuramUnit{ Name = "g",Coefficient = 12,},
-            new GuramUnit{ Name = "kg",Coefficient = 12,},
+            new GuramUnit{ Name = "mg",Coefficient = 0.5,},
+            new GuramUnit{ Name = "g",Coefficient = 1,},
+            new GuramUnit{ Name = "kg",Coefficient = 1000,},
         };
         public static ICollection<GuramUnit> Units { get { return units; } }
 
