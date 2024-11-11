@@ -21,5 +21,25 @@ namespace VisibilityConverter {
         public MainWindow() {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.DarkSeaGreen);
+        }
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e) {
+            RadioButton selectedRadioButton = (RadioButton)sender;
+
+            switch (selectedRadioButton.Content) {
+                case "Yellow":
+                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Yellow);
+                    break;
+                case "Blue":
+                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Blue);
+                    break;
+                case "Green":
+                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Green);
+                    break;
+            }
+        }
     }
 }
