@@ -30,13 +30,13 @@ namespace VisibilityConverter {
             RadioButton selectedRadioButton = (RadioButton)sender;
 
             switch (selectedRadioButton.Content) {
-                case "Yellow":
-                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Yellow);
+                case "赤":
+                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Red);
                     break;
-                case "Blue":
+                case "青":
                     Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Blue);
                     break;
-                case "Green":
+                case "緑":
                     Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Green);
                     break;
             }
