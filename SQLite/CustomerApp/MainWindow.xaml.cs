@@ -20,29 +20,54 @@ namespace CustomerApp {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
+        List<Customer> _customers;
         public MainWindow() {
             InitializeComponent();
+            ReadDatabase();
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-            };
+            };           
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
             }
+            ReadDatabase();//ListView表示
         }
 
         private void ReadButton_Click(object sender, RoutedEventArgs e) {
-
+           // ReadDatabase();
+        }
+        //ListView表示
+        private void ReadDatabase() {
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
-                var customers = connection.Table<Customer>().ToList();
+                _customers = connection.Table<Customer>().ToList();
 
-                CustomerListView.ItemsSource = customers;
+                CustomerListView.ItemsSource = _customers;
+            }
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            var filterList = _customers.Where(x => x.Name.Contains(SearchTextBox.Text)).ToList();
+            CustomerListView.ItemsSource = filterList;
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            var item = CustomerListView.SelectedItem as Customer;
+            if (item == null) {
+                MessageBox.Show("消すもん選ばんかい！");
+                return;
+            }
+            using (var connection = new SQLiteConnection(App.databasePass)) {
+                connection.CreateTable<Customer>();
+                connection.Delete(item);
+
+                ReadDatabase();
             }
         }
     }
