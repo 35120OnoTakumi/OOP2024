@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
         <StackPanel Margin="10">
             <Grid>
@@ -27,13 +27,14 @@
             </Grid>
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click"/>
             <Button Content="Read" x:Name="ReadButton" Click="ReadButton_Click"/>
-            <ListView x:Name="CustomerListView" Margin="0,5,0,0">
+            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="340">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock Text="{Binding Id}"/>
                             <TextBlock Text="{Binding Name}" FontSize="20"/>
-                            <TextBlock Text="{Binding Phon}" Foreground="Blue"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
+                            <TextBlock Text="{Binding Address}" Foreground="Green"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
