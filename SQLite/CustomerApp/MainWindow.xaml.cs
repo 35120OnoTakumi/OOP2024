@@ -22,7 +22,7 @@ namespace CustomerApp {
             ReadDatabase(); // 起動時にデータベースから情報を読み込み
         }
 
-        // 画像選択ボタンのクリックイベント
+        // 画像選択ボタン
         private void SelectImageButton_Click(object sender, RoutedEventArgs e) {
             var dialog = new OpenFileDialog();
             dialog.Filter = "画像ファイル (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif";
@@ -143,8 +143,8 @@ namespace CustomerApp {
             NameTextBox.Clear();
             PhoneTextBox.Clear();
             AddressTextBox.Clear();
-            _selectedImagePath = ""; // 画像パスもリセット
-            SelectedImage.Source = null; // 画像表示をリセット
+            _selectedImagePath = ""; // 画像リセット
+            SelectedImage.Source = null; // 画像表示リセット
         }
     }
 }
