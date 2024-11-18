@@ -39,7 +39,8 @@ namespace CustomerApp {
             ReadDatabase();//ListView表示
         }
 
-        private void ReadButton_Click(object sender, RoutedEventArgs e) {
+        private void UpdateButton_Click(object sender, RoutedEventArgs e) {
+
            // ReadDatabase();
         }
         //ListView表示
