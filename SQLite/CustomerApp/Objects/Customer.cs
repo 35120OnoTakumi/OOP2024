@@ -23,7 +23,11 @@ namespace CustomerApp.Objects {
         /// </summary>
         
         public string Address { get; set; }
-       
+
+        /// <summary>
+        /// 画像
+        /// </summary>
+        public string ImagePath { get; set; }
 
         public override string ToString() {
             return $"{Id}   {Name}  {Phone}    {Address}";

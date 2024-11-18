@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="500" Width="300">
     <Grid>
         <StackPanel Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -20,16 +23,24 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="名前" Grid.Row="0" Grid.Column="0"/>
                 <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text=" 電話番号" Grid.Row="1" Grid.Column="0"/>
+                <TextBlock Text="電話番号" Grid.Row="1" Grid.Column="0"/>
                 <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="住所" Grid.Row="2" Grid.Column="0"/>
                 <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="画像" Grid.Row="3" Grid.Column="0"/>
+                <Button Content="画像を選択" Grid.Row="3" Grid.Column="1" Click="SelectImageButton_Click"/>
+                <TextBlock Text="画像クリア" Grid.Row="4" Grid.Column="0"/>
+                <Button Content="画像をクリア" Grid.Row="4" Grid.Column="2" Click="ClearImageButton_Click"/>
             </Grid>
+
+            <!-- 画像の表示 -->
+            <Image x:Name="SelectedImage" Width="200" Height="200" Margin="10"/>
+
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" Margin="2"/>
             <Button Content="Update" x:Name="UpdateButton" Click="UpdateButton_Click" Margin="2"/>
             <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButton_Click" Margin="2"/>
             <TextBox x:Name="SearchTextBox" FontSize="20" TextChanged="SearchTextBox_TextChanged"/>
-            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="300">
+            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="300" SelectionChanged="CustomerListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
