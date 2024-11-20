@@ -19,7 +19,7 @@ namespace CustomerApp {
 
         public MainWindow() {
             InitializeComponent();
-            ReadDatabase(); // 起動時にデータベースから情報を読み込み
+            ReadDatabase(); // 起動時にDBの情報を読み込み
         }
 
         // 画像選択

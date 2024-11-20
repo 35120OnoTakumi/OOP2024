@@ -35,7 +35,7 @@
             </Grid>
 
             <!-- 画像の表示 -->
-            <Image x:Name="SelectedImage" Width="200" Height="200" Margin="10"/>
+            <Image x:Name="SelectedImage"  Margin="10"/>
 
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" Margin="2"/>
             <Button Content="Update" x:Name="UpdateButton" Click="UpdateButton_Click" Margin="2"/>
