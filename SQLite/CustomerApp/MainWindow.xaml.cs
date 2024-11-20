@@ -52,7 +52,7 @@ namespace CustomerApp {
             };
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
-                connection.CreateTable<Customer>(); // テーブルが存在しかったら作成
+                connection.CreateTable<Customer>(); // テーブルが存在したら作成
                 connection.Insert(customer); // データ挿入
             }
 
@@ -138,13 +138,21 @@ namespace CustomerApp {
             CustomerListView.ItemsSource = filterList; // 検索結果を表示
         }
 
-        //入力欄を空にする
+        // 入力欄を空にする
         private void ClearInputs() {
             NameTextBox.Clear();
             PhoneTextBox.Clear();
             AddressTextBox.Clear();
             _selectedImagePath = ""; // 画像リセット
             SelectedImage.Source = null; // 画像表示リセット
+        }
+
+        // ウィンドウ全体
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            // クリックされた場所が入力場所でなければクリア
+            if (!(e.OriginalSource is TextBox || e.OriginalSource is Image)) {
+                ClearInputs();
+            }
         }
     }
 }
