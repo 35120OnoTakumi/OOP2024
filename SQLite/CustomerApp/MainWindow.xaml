@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="300"
+        Title="MainWindow" Height="900" Width="500"
         MouseDown="Window_MouseDown">
     <Grid>
         <StackPanel Margin="10">
@@ -35,7 +35,7 @@
             </Grid>
 
             <!-- 画像の表示 -->
-            <Image x:Name="SelectedImage"  Margin="10"/>
+            <Image x:Name="SelectedImage" Width="150" Height="150" Margin="2"/>
 
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" Margin="2"/>
             <Button Content="Update" x:Name="UpdateButton" Click="UpdateButton_Click" Margin="2"/>
@@ -44,18 +44,31 @@
             <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="300" SelectionChanged="CustomerListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="5">
+                        <Grid Margin="5">
                             
-                        <StackPanel>
-                            <TextBlock Text="{Binding Id}"/>
-                            <TextBlock Text="{Binding Name}" FontSize="20"/>
-                            <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
-                            <TextBlock Text="{Binding Address}" Foreground="Green"/>
-                        </StackPanel>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="7*"/>
+                            </Grid.ColumnDefinitions>
 
-                            <Image Width="200" Height="100" Margin="10,0,0,0" Source="{Binding ImagePath}" />
+                            <TextBlock Text="{Binding Id}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+       
+                            <TextBlock Text="{Binding Name}" FontSize="20" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+                            
+                            <TextBlock Text="{Binding Phone}" Foreground="Blue" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+                         
+                            <TextBlock Text="{Binding Address}" Foreground="Green" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
 
-                        </StackPanel>
+                            <Image Width="200" Height="100" Margin="10,0,0,0" Source="{Binding ImagePath}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" />
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

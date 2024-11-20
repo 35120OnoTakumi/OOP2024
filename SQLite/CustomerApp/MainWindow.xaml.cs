@@ -145,6 +145,8 @@ namespace CustomerApp {
             AddressTextBox.Clear();
             _selectedImagePath = ""; // 画像リセット
             SelectedImage.Source = null; // 画像表示リセット
+            // 選択を解除
+            CustomerListView.SelectedItem = null;
         }
 
         // ウィンドウ全体
