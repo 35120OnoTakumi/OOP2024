@@ -14,7 +14,7 @@ namespace CustomerApp {
         // 画像を保持
         string _selectedImagePath = "";
 
-        // 顧客リスト
+        // リスト
         List<Customer> _customers;
 
         public MainWindow() {
@@ -22,7 +22,7 @@ namespace CustomerApp {
             ReadDatabase(); // 起動時にデータベースから情報を読み込み
         }
 
-        // 画像選択ボタン
+        // 画像選択
         private void SelectImageButton_Click(object sender, RoutedEventArgs e) {
             var dialog = new OpenFileDialog();
             dialog.Filter = "画像ファイル (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif";
@@ -30,19 +30,19 @@ namespace CustomerApp {
             if (dialog.ShowDialog() == true) {
                 _selectedImagePath = dialog.FileName;
 
-                // 選択した画像をImageコントロールに表示
+                // 選んだ画像をImageコントロールに表示
                 SelectedImage.Source = new BitmapImage(new Uri(_selectedImagePath));
             }
         }
 
-        // 画像クリアボタン
+        // 画像クリア
         private void ClearImageButton_Click(object sender, RoutedEventArgs e) {
             // 画像をクリア、Imageをリセット
             _selectedImagePath = "";
             SelectedImage.Source = null; // 画像をクリア
         }
 
-        // 保存ボタン
+        // 保存
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             var customer = new Customer() {
                 Name = NameTextBox.Text,
@@ -61,10 +61,10 @@ namespace CustomerApp {
             ClearInputs();
         }
 
-        // 情報をデータベースから読み込み
+        // 情報をDBから読み込み
         private void ReadDatabase() {
             using (var connection = new SQLiteConnection(App.databasePass)) {
-                connection.CreateTable<Customer>(); // テーブルを作成（存在しない時）
+                connection.CreateTable<Customer>(); // 存在しなかったらテーブル作成
                 _customers = connection.Table<Customer>().ToList(); // 情報をリストに取得
 
                 CustomerListView.ItemsSource = _customers; // ListViewにデータバインド
@@ -88,7 +88,7 @@ namespace CustomerApp {
             }
         }
 
-        // 更新ボタン
+        // 更新
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
@@ -113,7 +113,7 @@ namespace CustomerApp {
             ClearInputs();
         }
 
-        // 顧客削除ボタン
+        // 削除
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
@@ -123,7 +123,7 @@ namespace CustomerApp {
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>(); // テーブル作成（必要な場合）
-                connection.Delete(item); // 顧客データを削除
+                connection.Delete(item); // データ削除
             }
 
             ReadDatabase(); // ListViewを再読み込み
@@ -132,10 +132,10 @@ namespace CustomerApp {
             ClearInputs();
         }
 
-        // 検索テキスト変更時
+        // 変更時の検索
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             var filterList = _customers.Where(x => x.Name.Contains(SearchTextBox.Text)).ToList();
-            CustomerListView.ItemsSource = filterList; // 検索結果を表示
+            CustomerListView.ItemsSource = filterList; // 検索結果表示
         }
 
         // 入力欄を空にする
