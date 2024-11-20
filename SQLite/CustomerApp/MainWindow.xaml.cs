@@ -37,7 +37,7 @@ namespace CustomerApp {
 
         // 画像クリア
         private void ClearImageButton_Click(object sender, RoutedEventArgs e) {
-            // 画像をクリア、Imageをリセット
+            // 画像クリア、Imageリセット
             _selectedImagePath = "";
             SelectedImage.Source = null; // 画像をクリア
         }
