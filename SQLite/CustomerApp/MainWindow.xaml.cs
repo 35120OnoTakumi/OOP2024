@@ -43,7 +43,13 @@ namespace CustomerApp {
         }
 
         // 保存
-        private void SaveButton_Click(object sender, RoutedEventArgs e) {
+        private void RegistButton_Click(object sender, RoutedEventArgs e) {
+            // 入力チェック
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text) || string.IsNullOrWhiteSpace(PhoneTextBox.Text) || string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
+                MessageBox.Show("名前、電話番号、住所のいずれかが未入力。全て入力せんかい。",
+                    "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // 処理中止
+            }
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
@@ -87,13 +93,25 @@ namespace CustomerApp {
                 }
             }
         }
+        //MessageBox はアウトレイジ風
 
         // 更新
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text) || string.IsNullOrWhiteSpace(PhoneTextBox.Text) || string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
+                MessageBox.Show("名前、電話番号、住所のいずれかが未入力。全て入力せんかい。",
+                "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // 処理中止
+            }
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
                 MessageBox.Show("更新するもん選らばんかい!");
                 return;
+            }
+
+            // 画像が未選択の場合、既存の画像を保持
+            if (string.IsNullOrEmpty(_selectedImagePath)) {
+                // 画像を変更していない場合、変更前の画像を保持
+                _selectedImagePath = item.ImagePath;
             }
 
             // 情報を更新
