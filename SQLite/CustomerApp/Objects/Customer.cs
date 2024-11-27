@@ -1,18 +1,15 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerApp.Objects {
     public class Customer {
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
         /// <summary>
         /// 名前
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// 電話番号
         /// </summary>
@@ -21,13 +18,12 @@ namespace CustomerApp.Objects {
         /// <summary>
         /// 住所
         /// </summary>
-        
         public string Address { get; set; }
 
         /// <summary>
-        /// 画像
+        /// 画像 (byte[] に変更)
         /// </summary>
-        public string ImagePath { get; set; }
+        public byte[] Picture { get; set; }
 
         public override string ToString() {
             return $"{Id}   {Name}  {Phone}    {Address}";

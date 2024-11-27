@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="CustomerApp" Height="900" Width="500"
         MouseDown="Window_MouseDown">
+
     <Grid>
-        
         <StackPanel Margin="10,10,10,10" Grid.ColumnSpan="3">
             <Grid>
                 <Grid.RowDefinitions>
@@ -23,6 +23,7 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
+
                 <TextBlock Text="名前" Grid.Row="0" Grid.Column="0"/>
                 <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="電話番号" Grid.Row="1" Grid.Column="0"/>
@@ -30,12 +31,21 @@
                 <TextBlock Text="住所" Grid.Row="2" Grid.Column="0"/>
                 <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1"/>
                 <TextBlock Text="画像" Grid.Row="3" Grid.Column="0"/>
-                <Button Content="画像を選択" Grid.Row="3" Grid.Column="1" Click="SelectImageButton_Click"/>
+                <Button Grid.Row="3" Grid.Column="1" Click="SelectImageButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="image.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                        <TextBlock Text="画像を選択"/>
+                    </StackPanel>
+                </Button>
                 <TextBlock Text="画像クリア" Grid.Row="4" Grid.Column="0"/>
-                <Button Content="画像をクリア" Grid.Row="4" Grid.Column="2" Click="ClearImageButton_Click"/>
+                <Button Grid.Row="4" Grid.Column="1" Click="ClearImageButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="image_clear.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                        <TextBlock Text="画像をクリア"/>
+                    </StackPanel>
+                </Button>
             </Grid>
 
-            <!-- 画像の表示 -->
             <Image x:Name="SelectedImage" Width="150" Height="150" Margin="2"/>
 
             <Button Content="Regist" x:Name="RegistButton" Click="RegistButton_Click" Margin="2"/>
@@ -46,7 +56,6 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="5">
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -60,15 +69,16 @@
                                 <ColumnDefinition Width="7*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="{Binding Id}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding Id}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}" FontSize="20" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Blue" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Address}" Foreground="Green" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
 
-                            <TextBlock Text="{Binding Name}" FontSize="20" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
-
-                            <TextBlock Text="{Binding Phone}" Foreground="Blue" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
-
-                            <TextBlock Text="{Binding Address}" Foreground="Green" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
-
-                            <Image Width="200" Height="100" Margin="10,0,0,0" Source="{Binding ImagePath}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" />
+                            <Image Width="200" Height="100" Margin="10,0,0,0">
+                                <Image.Source>
+                                    <BitmapImage UriSource="{Binding ImageData}" />
+                                </Image.Source>
+                            </Image>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

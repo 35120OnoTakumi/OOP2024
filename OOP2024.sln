@@ -183,6 +183,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLite", "SQLite", "{A70A12
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApp", "SQLite\CustomerApp\CustomerApp.csproj", "{58619589-3E24-4C54-9E01-4AE8C0C9EDE8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Python", "Python", "{F6168C07-CFC8-4F4E-89E3-2450E32CCB73}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "SamplePython", "Python\SamplePython\SamplePython.pyproj", "{C823EC01-8841-4963-9926-A129835A204C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -425,6 +429,8 @@ Global
 		{58619589-3E24-4C54-9E01-4AE8C0C9EDE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58619589-3E24-4C54-9E01-4AE8C0C9EDE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58619589-3E24-4C54-9E01-4AE8C0C9EDE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C823EC01-8841-4963-9926-A129835A204C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C823EC01-8841-4963-9926-A129835A204C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -501,6 +507,7 @@ Global
 		{F2EA016C-839D-4106-ADA3-B67EB45B0555} = {DD3E6BA7-2EE3-435A-BCD7-F348C43FDFB2}
 		{8FEE9B4D-4E89-4E18-ACEE-3D94832D3B0D} = {DD3E6BA7-2EE3-435A-BCD7-F348C43FDFB2}
 		{58619589-3E24-4C54-9E01-4AE8C0C9EDE8} = {A70A128E-5CDE-414B-A064-A02B130EF395}
+		{C823EC01-8841-4963-9926-A129835A204C} = {F6168C07-CFC8-4F4E-89E3-2450E32CCB73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FA2E5DC5-8A1C-40E2-ADB5-7F2D97BC58F7}

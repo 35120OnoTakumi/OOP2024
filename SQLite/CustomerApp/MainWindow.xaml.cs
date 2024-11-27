@@ -1,25 +1,26 @@
-﻿using System.Windows;
-using Microsoft.Win32;
-using System.IO;
-using System.Windows.Media.Imaging;
-using SQLite;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using CustomerApp.Objects;
+using System.IO;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
-using System;
+using System.Windows.Media.Imaging;
+using Microsoft.Win32;
+using SQLite;
+using CustomerApp.Objects;
+using System.Drawing;
 
 namespace CustomerApp {
     public partial class MainWindow : Window {
-        // 画像を保持
-        string _selectedImagePath = "";
+        // 画像データ保持
+        private byte[] _selectedImageData = null;
 
         // リスト
-        List<Customer> _customers;
+        private List<Customer> _customers;
 
         public MainWindow() {
             InitializeComponent();
-            ReadDatabase(); // 起動時にDBの情報を読み込み
+            ReadDatabase(); // 起動時にDB読込み
         }
 
         // 画像選択
@@ -28,56 +29,64 @@ namespace CustomerApp {
             dialog.Filter = "画像ファイル (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif";
 
             if (dialog.ShowDialog() == true) {
-                _selectedImagePath = dialog.FileName;
+                string selectedImagePath = dialog.FileName;
+
+                // System.Drawing.Bitmapを使って画像を読み込み、byte[]に変換
+                using (Bitmap bmp = new Bitmap(selectedImagePath)) {
+                    using (MemoryStream ms = new MemoryStream()) {
+                        // 画像をJPEG形式でMemoryStreamに保存
+                        bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        _selectedImageData = ms.ToArray(); // byte配列に変換
+                    }
+                }
 
                 // 選んだ画像をImageコントロールに表示
-                SelectedImage.Source = new BitmapImage(new Uri(_selectedImagePath));
+                SelectedImage.Source = new BitmapImage(new Uri(selectedImagePath));
             }
         }
 
         // 画像クリア
         private void ClearImageButton_Click(object sender, RoutedEventArgs e) {
-            // 画像クリア、Imageリセット
-            _selectedImagePath = "";
-            SelectedImage.Source = null; // 画像をクリア
+            _selectedImageData = null; // 画像データリセット
+            SelectedImage.Source = null; // 画像表示リセット
         }
 
         // 保存
         private void RegistButton_Click(object sender, RoutedEventArgs e) {
             // 入力チェック
             if (string.IsNullOrWhiteSpace(NameTextBox.Text) || string.IsNullOrWhiteSpace(PhoneTextBox.Text) || string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
-                MessageBox.Show("名前、電話番号、住所のいずれかが未入力。全て入力せんかい。",
+                MessageBox.Show("名前、電話番号、住所のどれかが未入力。全て入力せんかい。",
                     "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 return; // 処理中止
             }
+
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-                ImagePath = _selectedImagePath // 画像を保存
+                Picture = _selectedImageData // byte配列保存
             };
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>(); // テーブルが存在したら作成
-                connection.Insert(customer); // データ挿入
+                connection.Insert(customer); // DBに挿入
             }
 
             ReadDatabase(); // ListViewを再読み込み
-            // 入力欄を空にする
-            ClearInputs();
+            ClearInputs(); // 入力欄を空にする
         }
 
-        // 情報をDBから読み込み
+        // DBから読込み
         private void ReadDatabase() {
             using (var connection = new SQLiteConnection(App.databasePass)) {
-                connection.CreateTable<Customer>(); // 存在しなかったらテーブル作成
-                _customers = connection.Table<Customer>().ToList(); // 情報をリストに取得
+                connection.CreateTable<Customer>(); // テーブル作成（必要な場合）
+                _customers = connection.Table<Customer>().ToList(); // リストに取得
 
                 CustomerListView.ItemsSource = _customers; // ListViewにデータバインド
             }
         }
 
-        // リストビュー選択変更
+        // 選択変更時
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (item != null) {
@@ -85,15 +94,19 @@ namespace CustomerApp {
                 PhoneTextBox.Text = item.Phone;
                 AddressTextBox.Text = item.Address;
 
-                // テーブルに関連付けた画像表示
-                if (!string.IsNullOrEmpty(item.ImagePath)) {
-                    SelectedImage.Source = new BitmapImage(new Uri(item.ImagePath));
+                // 画像データがあったら、画像として表示
+                if (item.Picture != null && item.Picture.Length > 0) {
+                    var imageStream = new MemoryStream(item.Picture);
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = imageStream;
+                    bitmap.EndInit();
+                    SelectedImage.Source = bitmap;
                 } else {
                     SelectedImage.Source = null; // 画像が無い場合表示せず
                 }
             }
         }
-        //MessageBox はアウトレイジ風
 
         // 更新
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
@@ -102,6 +115,7 @@ namespace CustomerApp {
                 "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 return; // 処理中止
             }
+
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
                 MessageBox.Show("更新するもん選らばんかい!");
@@ -109,26 +123,23 @@ namespace CustomerApp {
             }
 
             // 画像が未選択の場合、既存の画像を保持
-            if (string.IsNullOrEmpty(_selectedImagePath)) {
-                // 画像を変更していない場合、変更前の画像を保持
-                _selectedImagePath = item.ImagePath;
+            if (_selectedImageData == null) {
+                _selectedImageData = item.Picture; // 画像が変更がない場合は元の画像データを保持
             }
 
-            // 情報を更新
+            // 更新
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
-            item.ImagePath = _selectedImagePath; // 新しい画像を保存
+            item.Picture = _selectedImageData; // 新しい画像データを保存
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>(); // テーブル作成（必要な場合）
-                connection.Update(item); // データを更新
+                connection.Update(item); // 更新
             }
 
             ReadDatabase(); // ListViewを再読み込み
-
-            // 入力欄を空にする
-            ClearInputs();
+            ClearInputs(); // 入力欄を空にする
         }
 
         // 削除
@@ -141,16 +152,14 @@ namespace CustomerApp {
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>(); // テーブル作成（必要な場合）
-                connection.Delete(item); // データ削除
+                connection.Delete(item); // 削除
             }
 
             ReadDatabase(); // ListViewを再読み込み
-
-            // 入力欄を空にする
-            ClearInputs();
+            ClearInputs(); // 入力欄を空にする
         }
 
-        // 変更時の検索
+        // 検索
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             var filterList = _customers.Where(x => x.Name.Contains(SearchTextBox.Text)).ToList();
             CustomerListView.ItemsSource = filterList; // 検索結果表示
@@ -161,16 +170,14 @@ namespace CustomerApp {
             NameTextBox.Clear();
             PhoneTextBox.Clear();
             AddressTextBox.Clear();
-            _selectedImagePath = ""; // 画像リセット
+            _selectedImageData = null; // 画像データをリセット
             SelectedImage.Source = null; // 画像表示リセット
-            // 選択を解除
-            CustomerListView.SelectedItem = null;
+            CustomerListView.SelectedItem = null; // 選択解除
         }
 
-        // ウィンドウ全体
+        // ウィンドウ全体でクリックした場合、入力欄をクリア
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            // クリックされた場所が入力場所でなければクリア
-            if (!(e.OriginalSource is TextBox || e.OriginalSource is Image)) {
+            if (!(e.OriginalSource is TextBox || e.OriginalSource is System.Windows.Controls.Image)) {
                 ClearInputs();
             }
         }
