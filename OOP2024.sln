@@ -187,6 +187,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Python", "Python", "{F6168C
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "SamplePython", "Python\SamplePython\SamplePython.pyproj", "{C823EC01-8841-4963-9926-A129835A204C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Criate Graduation", "Criate Graduation", "{527E2933-A646-4268-9E98-A3680DA58F80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

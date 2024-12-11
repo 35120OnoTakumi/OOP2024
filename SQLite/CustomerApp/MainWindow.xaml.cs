@@ -29,10 +29,10 @@ namespace CustomerApp {
             dialog.Filter = "画像ファイル (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif";
 
             if (dialog.ShowDialog() == true) {
-                string selectedImagePath = dialog.FileName;
+                string selectedImageData = dialog.FileName;
 
                 // System.Drawing.Bitmapを使って画像を読み込み、byte[]に変換
-                using (Bitmap bmp = new Bitmap(selectedImagePath)) {
+                using (Bitmap bmp = new Bitmap(selectedImageData)) {
                     using (MemoryStream ms = new MemoryStream()) {
                         // 画像をJPEG形式でMemoryStreamに保存
                         bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -41,7 +41,7 @@ namespace CustomerApp {
                 }
 
                 // 選んだ画像をImageコントロールに表示
-                SelectedImage.Source = new BitmapImage(new Uri(selectedImagePath));
+                SelectedImage.Source = new BitmapImage(new Uri(selectedImageData));
             }
         }
 
