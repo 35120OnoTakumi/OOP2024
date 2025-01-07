@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using SQLite;
 using CustomerApp.Objects;
-using System.Drawing;
+using System.Windows.Media;
 
 namespace CustomerApp {
     public partial class MainWindow : Window {
@@ -26,22 +26,20 @@ namespace CustomerApp {
         // 画像選択
         private void SelectImageButton_Click(object sender, RoutedEventArgs e) {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "画像ファイル (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif";
+            dialog.Filter = "画像ファイル (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
 
             if (dialog.ShowDialog() == true) {
-                string selectedImageData = dialog.FileName;
+                string selectedImagePath = dialog.FileName;
 
-                // System.Drawing.Bitmapを使って画像を読み込み、byte[]に変換
-                using (Bitmap bmp = new Bitmap(selectedImageData)) {
-                    using (MemoryStream ms = new MemoryStream()) {
-                        // 画像をJPEG形式でMemoryStreamに保存
-                        bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        _selectedImageData = ms.ToArray(); // byte配列に変換
-                    }
-                }
+                // 画像をバイト配列に変換
+                _selectedImageData = File.ReadAllBytes(selectedImagePath);
 
                 // 選んだ画像をImageコントロールに表示
-                SelectedImage.Source = new BitmapImage(new Uri(selectedImageData));
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(selectedImagePath);
+                bitmapImage.EndInit();
+                SelectedImage.Source = bitmapImage;
             }
         }
 
@@ -111,20 +109,20 @@ namespace CustomerApp {
         // 更新
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             if (string.IsNullOrWhiteSpace(NameTextBox.Text) || string.IsNullOrWhiteSpace(PhoneTextBox.Text) || string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
-                MessageBox.Show("名前、電話番号、住所のいずれかが未入力。全て入力せんかい。",
+                MessageBox.Show("名前、電話番号、住所のいずれかが未入力です。全て入力してください。",
                 "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 return; // 処理中止
             }
 
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
-                MessageBox.Show("更新するもん選らばんかい!");
+                MessageBox.Show("更新するデータを選択してください。");
                 return;
             }
 
             // 画像が未選択の場合、既存の画像を保持
             if (_selectedImageData == null) {
-                _selectedImageData = item.Picture; // 画像が変更がない場合は元の画像データを保持
+                _selectedImageData = item.Picture; // 画像が変更されない場合は元の画像データを保持
             }
 
             // 更新
@@ -146,7 +144,7 @@ namespace CustomerApp {
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
-                MessageBox.Show("消すもん選べ！");
+                MessageBox.Show("削除するデータを選択してください。");
                 return;
             }
 

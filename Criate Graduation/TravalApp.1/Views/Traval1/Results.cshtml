@@ -1,0 +1,23 @@
+﻿<h1>検索結果</h1>
+
+@if (ViewData["Hotels"] != null)
+{
+    <ul>
+        @foreach (var hotel in (dynamic)ViewData["Hotels"])
+        {
+            <li>
+                <h3>@hotel.Name</h3>
+                <p>@hotel.Description</p>
+                <img src="@hotel.ImageUrl" alt="@hotel.Name" style="max-width: 300px;" />
+                <p>住所: @hotel.Address</p>
+                <p>料金: @hotel.Price</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>結果が見つかりませんでした。</p>
+}
+
+<a href="/">検索画面に戻る</a>
