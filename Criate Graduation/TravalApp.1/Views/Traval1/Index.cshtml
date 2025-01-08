@@ -1,8 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model TravalApp1.Models.RakutenApiResponse
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Hotels</h2>
+
+<ul>
+    @foreach (var hotel in Model.Hotels)
+    {
+        <li>
+            <h3>@hotel.HotelName</h3>
+            <p>@hotel.Address1 @hotel.Address2</p>
+            <a href="@hotel.HotelInformationUrl">More Info</a>
+            <img src="@hotel.HotelImageUrl" alt="@hotel.HotelName" />
+        </li>
+    }
+</ul>

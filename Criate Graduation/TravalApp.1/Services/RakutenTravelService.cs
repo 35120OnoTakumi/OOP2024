@@ -1,25 +1,27 @@
 ﻿using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+using TravalApp1.Models;
 
 namespace TravalApp1.Services {
     public class RakutenTravelService {
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
 
-        public RakutenTravelService(HttpClient httpClient, IConfiguration configuration) {
+        public RakutenTravelService(HttpClient httpClient) {
             _httpClient = httpClient;
-            _configuration = configuration;
         }
 
-        public async Task<string> SearchHotelsAsync(string location) {
-            var baseUrl = _configuration["RakutenTravelAPI:BaseUrl"];
-            var appId = _configuration["RakutenTravelAPI:ApplicationId"];
-            var url = $"{baseUrl}/Travel/HotelSearch/20170426?applicationId={appId}&location={location}";
+        public async Task<RakutenApiResponse> GetTravelDataAsync(string areaCode) {
+            var url = $"https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20170426?format=json&largeClassCode={areaCode}&applicationId=12345678901234567890";
 
             var response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode) {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<RakutenApiResponse>(json);
+            }
+
+            return null;
         }
     }
 }

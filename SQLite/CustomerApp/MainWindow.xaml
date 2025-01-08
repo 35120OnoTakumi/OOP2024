@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="CustomerApp" Height="900" Width="500"
-        MouseDown="Window_MouseDown">
-
+        Title="CustomerApp" Height="500" Width="300" Loaded="Window_Loaded" Background="#F4F4F4">
     <Grid>
-        <StackPanel Margin="10,10,10,10">
+        <StackPanel Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -23,63 +21,37 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
+                <TextBlock Text="名前" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontWeight="Bold" Foreground="#333333"/>
+                <TextBox x:Name="NameTextBox"  Grid.Row="0" Grid.Column="1" Margin="2" />
+                <TextBlock Text="電話番号" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center"  FontWeight="Bold" Foreground="#333333"/>
+                <TextBox x:Name="PhoneTextBox"  Grid.Row="1" Grid.Column="1"  Margin="2" />
+                <TextBlock Text="住所" Grid.Row="2" Grid.Column="0"  VerticalAlignment="Center"  FontWeight="Bold" Foreground="#333333"/>
+                <TextBox x:Name="AddressTextBox"  Grid.Row="2" Grid.Column="1"  Margin="2"/>
 
-                <TextBlock Text="名前" Grid.Row="0" Grid.Column="0"/>
-                <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="電話番号" Grid.Row="1" Grid.Column="0"/>
-                <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1"/>
-                <TextBlock Text="住所" Grid.Row="2" Grid.Column="0"/>
-                <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1"/>
-                <TextBlock Text="画像" Grid.Row="3" Grid.Column="0"/>
-                <Button Grid.Row="3" Grid.Column="1" Click="SelectImageButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="image.png" Width="20" Height="20" Margin="0,0,5,0"/>
-                        <TextBlock Text="画像を選択"/>
-                    </StackPanel>
-                </Button>
-                <TextBlock Text="画像クリア" Grid.Row="4" Grid.Column="0"/>
-                <Button Grid.Row="4" Grid.Column="1" Click="ClearImageButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="image_clear.png" Width="20" Height="20" Margin="0,0,5,0"/>
-                        <TextBlock Text="画像をクリア"/>
-                    </StackPanel>
-                </Button>
+                <TextBlock Text="画像" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Center" FontWeight="Bold" Foreground="#333333"/>
+                <Button Content="画像を添付" Grid.Row="3" Grid.Column="1" x:Name="SelectImageButton" Click="SelectImageButton_Click" Margin="2" Background="#FF2B3A2C" Foreground="White" FontWeight="Bold" />
+
+                <Button Content="画像をクリア" Grid.Row="4" Grid.Column="1" x:Name="ClearButton" Click="ClearButton_Click" Margin="2"/>
+                <Image x:Name="CustomerImage" Width="100" Height="100" Margin="5" Grid.Row="5" Grid.Column="2"/>
+
             </Grid>
 
-            <Image x:Name="SelectedImage" Width="150" Height="150" Margin="2"/>
+            <Button Content="登録" x:Name="ResistButton" Click="ResistButton_Click"  Margin="2"/>
+            <Button Content="削除" x:Name="DeleteButton" Click="DeleteButton_Click"  Margin="2" Background="#FF805A58" Foreground="White" FontWeight="Bold"/>
+            <Button Content="更新" x:Name="UpdateButton" Click="UpdateButton_Click" Margin="2"/>
 
-            <Button Content="Regist" x:Name="RegistButton" Click="RegistButton_Click" Margin="2"/>
-            <Button Content="Update" x:Name="UpdateButton" Click="UpdateButton_Click" Margin="2"/>
-            <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButton_Click" Margin="2"/>
             <TextBox x:Name="SearchTextBox" FontSize="20" TextChanged="SearchTextBox_TextChanged"/>
-            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="300" SelectionChanged="CustomerListView_SelectionChanged">
+
+            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="134" SelectionChanged="ListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="7*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Text="{Binding Id}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Name}" FontSize="20" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Phone}" Foreground="Blue" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Address}" Foreground="Green" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-
-                            <Image Width="200" Height="100" Margin="10,0,0,0">
-                                <Image.Source>
-                                    <BitmapImage UriSource="{Binding ImageData}" />
-                                </Image.Source>
-                            </Image>
-                        </Grid>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Id}"/>
+                            <TextBlock Text="{Binding Name}" FontSize="20"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
+                            <TextBlock Text="{Binding Address}" Foreground="Green"/>
+                            <Image Width="100" Height="100" Margin="5" Source="{Binding Image}" />
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

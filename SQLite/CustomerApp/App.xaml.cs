@@ -9,7 +9,7 @@ using System.Windows;
 namespace CustomerApp {
     /// <summary>
     /// App.xaml の相互作用ロジック
-    /// </summary>
+    /// </summary> 
     public partial class App : Application {
         static string databaseName = "Customer35120.db";
         static string folderPass = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

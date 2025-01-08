@@ -1,7 +1,6 @@
-namespace TravalApp._1.Models {
+namespace TravalApp1.Models {
     public class ErrorViewModel {
         public string? RequestId { get; set; }
-
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TravalApp1.Models;
 using TravalApp1.Services;
 
 namespace TravalApp1.Controllers {
@@ -10,22 +11,9 @@ namespace TravalApp1.Controllers {
             _rakutenTravelService = rakutenTravelService;
         }
 
-        // 検索画面の表示
-        public IActionResult Index() {
-            return View();
-        }
-
-        // 検索処理
-        [HttpPost]
-        public async Task<IActionResult> Search(string location) {
-            if (string.IsNullOrEmpty(location)) {
-                ModelState.AddModelError("", "場所を入力してください。");
-                return View("Index");
-            }
-
-            var response = await _rakutenTravelService.SearchHotelsAsync(location);
-            ViewData["Hotels"] = response; // JSONデータをビューに渡す
-            return View("Results");
+        public async Task<IActionResult> Index(string areaCode) {
+            var travelData = await _rakutenTravelService.GetTravelDataAsync(areaCode);
+            return View(travelData);
         }
     }
 }

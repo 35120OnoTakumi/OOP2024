@@ -1,23 +1,25 @@
-﻿<h1>検索結果</h1>
+﻿@model IEnumerable<TravalApp1.Models.TouristSpot>
 
-@if (ViewData["Hotels"] != null)
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h1>Search Results</h1>
+
+@if (Model != null && Model.Any())
 {
     <ul>
-        @foreach (var hotel in (dynamic)ViewData["Hotels"])
+        @foreach (var spot in Model)
         {
             <li>
-                <h3>@hotel.Name</h3>
-                <p>@hotel.Description</p>
-                <img src="@hotel.ImageUrl" alt="@hotel.Name" style="max-width: 300px;" />
-                <p>住所: @hotel.Address</p>
-                <p>料金: @hotel.Price</p>
+                <h3>@spot.Name</h3>
+                <p>@spot.Address</p>
+                <img src="@spot.ImageUrl" alt="@spot.Name" />
             </li>
         }
     </ul>
 }
 else
 {
-    <p>結果が見つかりませんでした。</p>
+    <p>No results found.</p>
 }
-
-<a href="/">検索画面に戻る</a>
