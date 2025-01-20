@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Search for Hotels";
+}
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<h1>Search for Hotels</h1>
+
+<form method="get" asp-action="Search">
+    <label for="keyword">Keyword:</label>
+    <input type="text" id="keyword" name="keyword"
+           value="@HttpContextAccessor.HttpContext?.Request.Query["keyword"] ?? string.Empty" />
+    <button type="submit">Search</button>
+</form>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color: red;">@ViewBag.ErrorMessage</p>
+}
+else if (ViewBag.Result != null)
+{
+    <ul>
+        @foreach (var hotel in ViewBag.Result)
+        {
+            <li>
+                <strong>@hotel.HotelBasicInfo.HotelName</strong><br />
+                @hotel.HotelBasicInfo.Address<br />
+                @hotel.HotelBasicInfo.TelephoneNo<br />
+                <a href="@hotel.HotelBasicInfo.HotelInformationUrl" target="_blank">View Details</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hotels found.</p>
+}
+
+<!-- Debug情報（開発中のみ使用） -->
+@if (ViewBag.ResponseString != null)
+{
+    <h2>Debug: API Response</h2>
+    <pre>@ViewBag.ResponseString</pre>
+}

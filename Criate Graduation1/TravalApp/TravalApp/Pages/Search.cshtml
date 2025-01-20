@@ -1,0 +1,15 @@
+﻿@page
+@model TravalApp.Models.SearchViewModel
+
+<h1>観光地検索</h1>
+
+<form method="post" asp-action="Search">
+    <label for="location">場所:</label>
+    <input type="text" id="location" name="location" />
+    <button type="submit">検索</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color: red;">@Model.ErrorMessage</p>
+}

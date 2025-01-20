@@ -20,7 +20,7 @@ namespace CustomerApp {
         // 保存
         private void ResistButton_Click(object sender, RoutedEventArgs e) {
             if (NameTextBox.Text == "") {
-                MessageBox.Show("名前を入力してください。");
+                MessageBox.Show("名前を入力");
                 return;
             }
 
@@ -47,7 +47,7 @@ namespace CustomerApp {
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             var selectedCustomer = (Customer)CustomerListView.SelectedItem;
             if (selectedCustomer == null) {
-                MessageBox.Show("更新する顧客を選択してください");
+                MessageBox.Show("更新する顧客を選択");
                 return;
             }
 
@@ -57,6 +57,8 @@ namespace CustomerApp {
 
             if (_imageData != null) {
                 selectedCustomer.ImageData = _imageData;
+            } else {
+                selectedCustomer.ImageData = null;
             }
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
@@ -95,7 +97,7 @@ namespace CustomerApp {
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
-                MessageBox.Show("削除する顧客を選択してください");
+                MessageBox.Show("削除する顧客を選択");
                 return;
             }
 

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<!-- または適切なバージョン -->
+	</PropertyGroup>
+
+	<ItemGroup><!-- Razor.Design を削除 -->
+		
+	
+	  <Compile Update="Controllers\TravelController.cs">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Compile>
+	</ItemGroup>
+
+</Project>
