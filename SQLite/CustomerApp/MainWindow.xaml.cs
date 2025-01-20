@@ -70,6 +70,7 @@ namespace CustomerApp {
             ClearText();
         }
 
+
         // クリア
         private void ClearText() {
             NameTextBox.Clear();
