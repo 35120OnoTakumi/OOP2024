@@ -1,28 +1,33 @@
-﻿@{
-    ViewData["Title"] = "旅行検索";
-}
+﻿@model dynamic
 
-<h2>旅行検索</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TravelApp - ホーム</title>
+</head>
+<body>
+    <h1>ホテル一覧</h1>
+    <ul>
+        @foreach (var hotel in Model.Hotels)
+        {
+            <li>
+                <h2>@hotel.Name</h2>
+                <p>住所: @hotel.Address</p>
+                <p>料金: ¥@hotel.MinCharge</p>
+                <img src="@hotel.ImageUrl" alt="@hotel.Name" style="width:200px;">
+            </li>
+        }
+    </ul>
 
-<form asp-action="Search" method="post">
-    <div>
-        <label for="keyword">キーワード</label>
-        <input type="text" id="keyword" name="keyword" value="" />
-        <button type="submit">検索</button>
-    </div>
-</form>
-
-@if (ViewBag.Error != null)
-{
-    <div style="color: red;">
-        <p>@ViewBag.Error</p>
-    </div>
-}
-
-@if (ViewBag.Result.ValueKind != System.Text.Json.JsonValueKind.Undefined)
-{
-    <div>
-        <h3>検索結果</h3>
-        <pre>@ViewBag.Result</pre>
-    </div>
-}
+    <h1>観光地一覧</h1>
+    <ul>
+        @foreach (var attraction in Model.Attractions)
+        {
+            <li>
+                <h2>@attraction.Name</h2>
+                <p>@attraction.Description</p>
+            </li>
+        }
+    </ul>
+</body>
+</html>

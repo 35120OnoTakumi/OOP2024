@@ -1,10 +1,14 @@
+// Program.cs
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using TravelApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// ÉTÅ[ÉrÉXÇìoò^
+// ÉTÅ[ÉrÉXÇÃìoò^
 builder.Services.AddControllersWithViews();
-
-// IHttpContextAccessor Çìoò^
-builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient<RakutenTravelService>();
 
 var app = builder.Build();
 
@@ -16,7 +20,6 @@ if (!app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();

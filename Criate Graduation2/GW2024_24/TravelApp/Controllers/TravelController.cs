@@ -1,38 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// TravelController.cs
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TravelApp.Services;
 
 namespace TravelApp.Controllers {
+    /// <summary>
+    /// 観光地検索に関するリクエストを処理するコントローラー。
+    /// </summary>
     public class TravelController : Controller {
         private readonly RakutenTravelService _rakutenTravelService;
 
-        // コンストラクターでサービスを受け取る
         public TravelController(RakutenTravelService rakutenTravelService) {
-            _rakutenTravelService = rakutenTravelService ?? throw new ArgumentNullException(nameof(rakutenTravelService));
+            _rakutenTravelService = rakutenTravelService;
         }
 
-        // Index メソッド
-        public IActionResult Index() {
-            return View();
-        }
-
-        // Search メソッド
-        [HttpPost]
+        /// <summary>
+        /// 指定されたキーワードで観光地情報を検索し、結果をビューに渡す。
+        /// </summary>
         public async Task<IActionResult> Search(string keyword) {
-            if (string.IsNullOrEmpty(keyword)) {
-                ViewBag.Error = "検索キーワードを入力してください。";
-                return View("Index");
-            }
-
-            try {
-                var result = await _rakutenTravelService.SearchHotelsAsync(keyword);
-                ViewBag.Result = result;
-                return View("Index");
-            }
-            catch (Exception ex) {
-                ViewBag.Error = "検索中にエラーが発生しました: " + ex.Message;
-                return View("Index");
-            }
+            var attractions = await _rakutenTravelService.SearchAttractionsAsync(keyword);
+            return View("SearchResults", attractions);
         }
-
     }
 }

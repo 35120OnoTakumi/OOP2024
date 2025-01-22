@@ -1,0 +1,15 @@
+﻿<!--SearchResults.cshtml-->
+@{
+    ViewBag.Title = "検索結果";
+}
+
+<h1>検索結果</h1>
+
+@if (ViewBag.Results != null)
+{
+    <pre>@ViewBag.Results</pre>
+}
+else
+{
+    <p>結果が見つかりませんでした。</p>
+}
