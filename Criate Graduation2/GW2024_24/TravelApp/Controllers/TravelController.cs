@@ -1,25 +1,37 @@
-﻿// TravelController.cs
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using TravelApp.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using TravelApp.Models;
+using System.Collections.Generic;
 
 namespace TravelApp.Controllers {
-    /// <summary>
-    /// 観光地検索に関するリクエストを処理するコントローラー。
-    /// </summary>
     public class TravelController : Controller {
-        private readonly RakutenTravelService _rakutenTravelService;
+        public IActionResult Index() {
+            // サンプルデータを作成
+            var hotels = new List<RakutenTravelResponse>
+            {
+                new RakutenTravelResponse
+                {
+                    HotelName = "Sample Hotel",
+                    Address = "123 Sample St",
+                    Price = 10000,
+                    ImageUrl = "https://via.placeholder.com/150",
+                    Description = "A sample description for Sample Hotel."
+                },
+                new RakutenTravelResponse
+                {
+                    HotelName = "Example Inn",
+                    Address = "456 Example Rd",
+                    Price = 8000,
+                    ImageUrl = "https://via.placeholder.com/150",
+                    Description = "A sample description for Example Inn."
+                }
+            };
 
-        public TravelController(RakutenTravelService rakutenTravelService) {
-            _rakutenTravelService = rakutenTravelService;
-        }
+            // モデルにデータを設定
+            var model = new SearchResultsViewModel {
+                Hotels = hotels
+            };
 
-        /// <summary>
-        /// 指定されたキーワードで観光地情報を検索し、結果をビューに渡す。
-        /// </summary>
-        public async Task<IActionResult> Search(string keyword) {
-            var attractions = await _rakutenTravelService.SearchAttractionsAsync(keyword);
-            return View("SearchResults", attractions);
+            return View(model);
         }
     }
 }

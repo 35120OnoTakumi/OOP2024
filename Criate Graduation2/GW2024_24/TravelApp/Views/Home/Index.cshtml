@@ -1,33 +1,31 @@
-﻿@model dynamic
+﻿@model TravelApp.Models.SearchResultsViewModel
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TravelApp - ホーム</title>
+    <title>Hotel Listings</title>
 </head>
 <body>
-    <h1>ホテル一覧</h1>
-    <ul>
-        @foreach (var hotel in Model.Hotels)
-        {
-            <li>
-                <h2>@hotel.Name</h2>
-                <p>住所: @hotel.Address</p>
-                <p>料金: ¥@hotel.MinCharge</p>
-                <img src="@hotel.ImageUrl" alt="@hotel.Name" style="width:200px;">
-            </li>
-        }
-    </ul>
+    <h1>Available Hotels</h1>
 
-    <h1>観光地一覧</h1>
-    <ul>
-        @foreach (var attraction in Model.Attractions)
-        {
-            <li>
-                <h2>@attraction.Name</h2>
-                <p>@attraction.Description</p>
-            </li>
-        }
-    </ul>
+    @if (Model?.Hotels != null && Model.Hotels.Any())
+    {
+        <ul>
+            @foreach (var hotel in Model.Hotels)
+            {
+                <li>
+                    <strong>@hotel.HotelName</strong><br />
+                    Address: @hotel.Address<br />
+                    Price: @hotel.Price yen<br />
+                    <img src="@hotel.ImageUrl" alt="@hotel.HotelName" /><br />
+                    Description: @hotel.Description
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No hotels found.</p>
+    }
 </body>
 </html>
