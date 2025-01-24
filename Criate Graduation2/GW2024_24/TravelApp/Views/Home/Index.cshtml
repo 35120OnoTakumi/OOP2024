@@ -1,31 +1,15 @@
-﻿@model TravelApp.Models.SearchResultsViewModel
+﻿@{
+    ViewData["Title"] = "観光地検索";
+}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hotel Listings</title>
-</head>
-<body>
-    <h1>Available Hotels</h1>
+<h1>@ViewData["Title"]</h1>
 
-    @if (Model?.Hotels != null && Model.Hotels.Any())
-    {
-        <ul>
-            @foreach (var hotel in Model.Hotels)
-            {
-                <li>
-                    <strong>@hotel.HotelName</strong><br />
-                    Address: @hotel.Address<br />
-                    Price: @hotel.Price yen<br />
-                    <img src="@hotel.ImageUrl" alt="@hotel.HotelName" /><br />
-                    Description: @hotel.Description
-                </li>
-            }
-        </ul>
-    }
-    else
-    {
-        <p>No hotels found.</p>
-    }
-</body>
-</html>
+<form method="post" asp-action="Search">
+    <label for="query">キーワード:</label>
+    <input type="text" id="query" name="query" required />
+    <br />
+    <label for="areaCode">エリアコード:</label>
+    <input type="text" id="areaCode" name="areaCode" required />
+    <br />
+    <button type="submit">検索</button>
+</form>

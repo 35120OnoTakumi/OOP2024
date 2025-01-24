@@ -1,14 +1,15 @@
-// Program.cs
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+// 修正版: Program.cs
 using TravelApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// サービスの登録
+// サービスの追加
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient<RakutenTravelService>();
+builder.Services.AddScoped<RakutenTravelService>();
+builder.Services.AddHttpClient();
+
+// 正しいC#バージョンとフレームワークを設定
+builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
 var app = builder.Build();
 
@@ -20,6 +21,7 @@ if (!app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();

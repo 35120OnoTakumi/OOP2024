@@ -1,16 +1,21 @@
-﻿// SearchResultsViewModel.cs
-using System.Collections.Generic;
-using TravelApp.Models;
+﻿@model TravelApp.Models.SearchResultsViewModel
 
-namespace TravelApp.ViewModels
+<h1>検索結果</h1>
+
+@if (Model.Results.Any())
 {
-    /// <summary>
-    /// 検索結果をビューに渡すためのViewModel。
-    ///
-</summary>
-    public class SearchResultsViewModel
-    {
-        public List<RakutenTravelResponse>
-    Results { get; set; } // 検索結果のリスト
-    }
-    }
+    <ul>
+        @foreach (var spot in Model.Results)
+        {
+            <li>
+                <h3>@spot.Name</h3>
+                <p>@spot.Description</p>
+                <p>@spot.Address</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>検索結果が見つかりませんでした。</p>
+}

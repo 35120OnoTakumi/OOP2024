@@ -1,14 +1,19 @@
-﻿namespace TravelApp.Models {
-   /* public class TravelSpot {
-        public int Id { get; set; } // 観光地ID
-        public string Name { get; set; } = string.Empty; // 観光地名
-        public string Description { get; set; } = string.Empty; // 説明文
-        public string ImageUrl { get; set; } = string.Empty; // 画像URL
-        public string Souvenirs { get; set; } = string.Empty; // お土産情報
-        public decimal EntryFee { get; set; } // 入場料
-        public string Hours { get; set; } = string.Empty; // 営業時間
-        public string Address { get; set; } = string.Empty; // 住所
-        public double Latitude { get; set; } // 緯度
-        public double Longitude { get; set; } // 経度
-    }*/
+﻿// 修正版: Models/TravelSpot.cs
+namespace TravelApp.Models {
+    public class TravelSpot {
+        public string Name { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string Keyword { get; set; } = string.Empty;
+        public string AreaCode { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+
+        // コンストラクタでプロパティを初期化
+        public TravelSpot(string name, string address, string keyword, string areaCode, string description) {
+            Name = name;
+            Address = address;
+            Keyword = keyword;
+            AreaCode = areaCode;
+            Description = description;
+        }
+    }
 }
