@@ -1,19 +1,18 @@
-// 修正版: Program.cs
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using TravelApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// サービスの追加
-builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<RakutenTravelService>();
-builder.Services.AddHttpClient();
+// RakutenTravelApiClient を DI に登録
+builder.Services.AddHttpClient<RakutenTravelApiClient>();
 
-// 正しいC#バージョンとフレームワークを設定
-builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// ミドルウェアの設定
 if (!app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
@@ -21,9 +20,7 @@ if (!app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

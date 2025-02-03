@@ -1,15 +1,61 @@
-﻿@{
-    ViewData["Title"] = "観光地検索";
+﻿@model List<TravelApp.Models.HotelInfo>
+@{
+    ViewData["Title"] = Model != null && Model.Any() ? "検索結果" : "ホテル検索";
 }
 
-<h1>@ViewData["Title"]</h1>
+<!-- 検索欄の上に表示する「ホテル検索」 -->
+<h2>@ViewData["Title"]</h2>
 
-<form method="post" asp-action="Search">
-    <label for="query">キーワード:</label>
-    <input type="text" id="query" name="query" required />
-    <br />
-    <label for="areaCode">エリアコード:</label>
-    <input type="text" id="areaCode" name="areaCode" required />
-    <br />
+<!-- トップページに表示する画像 -->
+@* @if (Model == null || !Model.Any())
+{
+    <img src="~/images/hotel-search-banner.jpg" alt="ホテル検索" style="width:100%; max-height: 300px; object-fit: cover;">
+} 
+ *@
+<form asp-controller="HotelSearch" asp-action="Search" method="get">
+    <input type="text" name="keyword" placeholder="ホテル名を入力" required>
     <button type="submit">検索</button>
 </form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="hotel-container">
+        @foreach (var hotel in Model)
+        {
+            <div class="hotel-card">
+                <h3>@hotel.HotelName</h3>
+                <a href="@hotel.HotelInformationUrl" target="_blank">
+                    <img src="@hotel.HotelThumbnailUrl" alt="@hotel.HotelName">
+                </a>
+            </div>
+        }
+    </div>
+}
+
+<style>
+    /* ホテル一覧のコンテナ */
+    .hotel-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    /* ホテルカード */
+    .hotel-card {
+        width: 180px;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        /* ホテル画像 */
+        .hotel-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+</style>

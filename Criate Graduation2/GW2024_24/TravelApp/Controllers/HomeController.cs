@@ -1,33 +1,34 @@
-﻿// ファイル: Controllers/HomeController.cs
-// 目的: ユーザーのリクエストを処理し、結果をビューに渡すコントローラー。
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TravelApp.Models;
 using TravelApp.Services;
 
 namespace TravelApp.Controllers {
     public class HomeController : Controller {
-        private readonly RakutenTravelService _rakutenTravelService;
+        private readonly RakutenTravelApiClient _apiClient;
 
-        public HomeController(RakutenTravelService rakutenTravelService) {
-            _rakutenTravelService = rakutenTravelService;
+        public HomeController(RakutenTravelApiClient apiClient) {
+            _apiClient = apiClient;
         }
 
         public IActionResult Index() {
             return View();
         }
 
-        public IActionResult Privacy() {
-            return View();
-        }
+        [HttpGet]
+        public async Task<IActionResult> Search(string keyword) {
+            if (string.IsNullOrWhiteSpace(keyword)) {
+                return View("Index", null);
+            }
 
-        [HttpPost]
-        public async Task<IActionResult> Search(string query, string areaCode) {
-            var results = await _rakutenTravelService.SearchTravelSpotsAsync(query, areaCode);
-            var viewModel = new SearchResultsViewModel {
-                Results = results,
-                SearchQuery = query
-            };
-            return View("SearchResults", viewModel);
+            var result = await _apiClient.SearchHotelsAsync(keyword);
+
+            if (result == null || result.Hotels.Count == 0) {
+                ViewBag.Message = "�������ʂ�����܂���ł����B";
+                return View("Index", null);
+            }
+
+            return View("Index", result);
         }
     }
 }
