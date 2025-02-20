@@ -1,81 +1,16 @@
-/* 基本のレイアウトを調整 */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    background-image: url('/images/sotuyougazou.jpg'); /* 背景画像 */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* スクロールしても背景が固定される */
+/* ホテル名のスタイル */
+.hotel-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+    white-space: nowrap; /* 一行で表示されるように改行を防止 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 長いテキストは省略記号を表示 */
 }
 
-/* メインコンテンツを中央に配置 */
-.content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 横が中央 */
-    justify-content: flex-start; /* 縦方向はデフォルトのまま */
-    padding-top: 50px;
-    width: 100%;
-}
-
-/* タイトル（ホテル検索）を中央に配置 */
-h2 {
-    text-align: center;
-    width: 100%;
-}
-
-/* 検索フォーム全体のデザイン */
-.search-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-/* 入力欄とボタンを中央に配置 */
-.search-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-    /* 入力欄のデザイン */
-    .search-box input {
-        padding: 5px;
-        font-size: 16px;
-    }
-
-    /* 検索ボタンの見た目 */
-    .search-box button {
-        padding: 5px 10px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-/* 検索結果をコンテナに */
-.results-container {
-    width: 100%;
-    max-height: 70vh;
-    overflow-y: auto; /* 検索結果だけが動く */
-    padding: 20px;
-}
-
-/* ホテル一覧の見た目 */
-.hotel-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px; 
-    padding: 20px;
-}
-
-/* ホテルカードのデザイン */
+/* ホテルカード */
 .hotel-card {
-    width: 180px; /* カードの横幅を調整 */
+    width: 220px; /* カードの横幅を広げる */
     background: white;
     padding: 10px;
     text-align: center;
@@ -84,38 +19,24 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    word-wrap: break-word; /* 文字が長くても折り返し */
+    overflow: hidden; /* カード内の内容がはみ出さないように */
 }
 
-/* ホテル画像のサイズ調整 */
-.hotel-image {
-    width: 100%;
-    height: auto;
-    max-height: 120px; /* 画像の高さを設定 */
-    border-radius: 5px;
-    object-fit: cover;
-}
-
-/* ホテル名のスタイル */
-.hotel-name {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 5px 0;
-}
-
-/* 詳細リンク */
-.details-link {
-    color: blue;
+/* ページネーション */
+.pagination a {
+    margin: 0 5px;
+    padding: 5px 10px;
     text-decoration: none;
+    background-color: #f0f0f0;
+    border-radius: 5px;
 }
 
-/* フッター */
-.footer {
-    width: 100%;
-    background-color: rgba(248, 249, 250, 0.8);
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-}
+    .pagination a.active {
+        background-color: #007bff;
+        color: white;
+    }
 
-
-
+    .pagination a:hover {
+        background-color: #ddd;
+    }

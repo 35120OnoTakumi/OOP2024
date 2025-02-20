@@ -1,21 +1,103 @@
 ﻿@model List<TravelApp.Models.HotelInfo>
+
 @{
-    ViewData["Title"] = Model != null && Model.Any() ? "検索結果" : "ホテル検索";
+    ViewData["Title"] = "お気に入り";
 }
 
-<!-- 検索欄の上に表示する「ホテル検索」 -->
-<h2>@ViewData["Title"]</h2>
+<!-- 背景画像を設定し、中央配置 -->
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        background-image: url('/images/sotuyougazou.jpg'); /* 背景画像 */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* スクロールしても背景が固定される */
+    }
 
-<!-- トップページに表示する画像 -->
-@* @if (Model == null || !Model.Any())
-{
-    <img src="~/images/hotel-search-banner.jpg" alt="ホテル検索" style="width:100%; max-height: 300px; object-fit: cover;">
-} 
- *@
-<form asp-controller="HotelSearch" asp-action="Search" method="get">
-    <input type="text" name="keyword" placeholder="ホテル名を入力" required>
-    <button type="submit">検索</button>
-</form>
+    /* メインコンテンツの中央配置 */
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        width: 100%;
+    }
+
+    /* ホテル検索のタイトル中央配置 */
+    h2 {
+        text-align: center;
+        width: 100%;
+    }
+
+    /* 検索フォームのデザイン */
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .search-box input {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    /* ホテルリストの中央配置 */
+    .hotel-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+    }
+
+    /* ホテルカードのデザイン */
+    .hotel-card {
+        width: 180px;
+        background: white;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .hotel-card img {
+            width: 100%;
+            height: auto;
+            max-height: 120px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        /* お気に入りページ */
+        .hotel-card a {
+            color: blue;
+            text-decoration: none;
+        }
+</style>
+
+<h2>お気に入りホテル</h2>
 
 @if (Model != null && Model.Any())
 {
@@ -23,39 +105,31 @@
         @foreach (var hotel in Model)
         {
             <div class="hotel-card">
-                <h3>@hotel.HotelName</h3>
+                <h3>
+                    @if (string.IsNullOrEmpty(hotel.HotelSubname))
+                    {
+                        @hotel.HotelName  <!-- HotelSubname が空の場合、カッコを表示しない -->
+                    }
+                    else
+                    {
+                        @Html.Raw(hotel.HotelName + " (" + hotel.HotelSubname + ")")  <!-- HotelSubname がある場合はカッコ内を表示 -->
+                    }
+            }
+                </h3>
                 <a href="@hotel.HotelInformationUrl" target="_blank">
-                    <img src="@hotel.HotelThumbnailUrl" alt="@hotel.HotelName">
+                    <img src="@hotel.HotelThumbnailUrl" alt="@hotel.HotelName" />
                 </a>
+                <a href="@Url.Action("RemoveFromFavorites", "HotelSearch", new { hotelName = hotel.HotelName })">お気に入りから削除</a>
             </div>
         }
     </div>
 }
+else
+{
+    <p>お気に入りに登録したホテルはありません。</p>
+}
 
-<style>
-    /* ホテル一覧のコンテナ */
-    .hotel-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-    }
-
-    /* ホテルカード */
-    .hotel-card {
-        width: 180px;
-        background: white;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-        /* ホテル画像 */
-        .hotel-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-</style>
+<!-- プライバシーポリシーのリンク -->
+<div class="footer">
+    <a href="@Url.Action("Privacy", "Home")">プライバシーポリシー</a>
+</div>
